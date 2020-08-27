@@ -1,0 +1,176 @@
+# Minimal Application Flow design
+# {} - denotes a scope
+# () - denotes a description
+# [] - denotes a process
+
+
+{
+    Front_End
+    {
+        Homepage
+        {
+            (Login Interface)
+            (Provide login via Username and Password)
+            [
+                (Sign In)
+                [
+                    [Send form data to Back_End/Login/Login_Validation module]
+                    [receive result from Back_End/Login/Login_Validation module]
+                    [if success then direct to either Student, Admin or Test_Admin as may be case]
+                ]
+                (New User)
+                [
+                    [Direct to New_Login]
+                ]
+            ]
+            
+        }
+        New_Login
+        {
+            (Interface to register new users)
+            (Display a form with some compulsory fields)
+            [Send Username to Back_End/Login/New_User/ValidateUsrName to check availability]
+            [Send form data to new Back_End/Login/New_User/AddRecord]
+            [Generate and send OTP on the given mobile number]
+            (accept OTP from User)
+            [Forward OTP to Back_End/Login/New_User/AddRecord]
+            [Accept Result from Back_End/Login/New_User/AddRecord]
+
+        }
+        Student
+        {
+            DashBoad
+            {
+                MyProfile
+                (Default)
+                {
+
+                }
+                Ebook_Zone
+                {
+                    Filter_Search
+                    {
+
+                    }
+                    Text_Search
+                    {
+
+                    }
+                }
+                Career_Prospects
+                {
+                    Articles
+                    {
+
+                    }
+                    Videos
+                    {
+
+                    }
+                    
+                }
+                Colleges
+                {
+
+                }
+                Check_Yourself
+                {
+
+                }
+
+            }
+
+        }
+        Admin
+        {
+            DashBoard
+            {
+                Stats
+                (Default)
+                {
+                    Current_Stats
+                    {
+
+                    }
+                    Stats_Generator_With_Filter
+                    {
+
+                    }
+                }
+                View
+                {
+                    Candidates
+                    {
+                        
+                    }
+                    Test-Admins
+                    {
+                        
+                    }
+                }
+                Modify
+                {
+                    Add_Test_Admins
+                    {
+
+                    }
+                    Remove_Test_Admins
+                    {
+                        
+                    }
+                }
+            }
+        }
+        Test_Admin
+        {
+
+        }
+    }
+    Back_End
+    {
+        Login
+        {
+            Login_Validation
+            {
+                (Verifies if login credentials are valid)
+                [Queries the database to validate login]
+                [Queries the database to determine type of user if password matches]
+                [send the type of user if applicable]
+                [Create sessions variable]
+            }
+            New_User
+            {
+                ValidateUsrName
+                {
+                    [Check if the name exists in the database already]
+                    [Return true/false]
+                }
+                AddRecord
+                {
+                    [Accept Form data. Start the timer]
+                    (Wait for OTP)
+                    [if-then [timer-expires] 
+                        [
+                            [Delete data from Server]
+                            [Send error message to New_Login]
+                        ]
+                    ]
+                    (OTP arrives)
+                    [
+                        [if-then-else (data exists for a given requested username)
+                            [add the data]
+                            [discard the OTP]
+                        ]
+
+                    ]
+                    [send error message if any]
+                }
+
+            }
+        }
+        Test
+        {
+
+        }
+    }
+}
