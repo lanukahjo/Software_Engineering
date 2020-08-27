@@ -1,0 +1,30 @@
+# Cloud Based Career Guidance System
+(Rough and Informal)
+
+1. A simple interface for the candidates to register.
+    - Need to store the the user details in secure fashion (Password encrypted)
+    - Provide a password recovery mechanism
+    - Do not sell the data. LOL 
+2. Availability of options in higher studies.
+    - Design a Schema to store the data in some database.
+    - Verify the details via an admin module.
+3. A test module needs to be degigned.
+    - It would be a general test suite, allows interface to add/delete/modify questions.
+    - Also it should be as much general as possible so as it can be cater to needs of changing pedagogies.
+        - Allow multiple type of question (MCQ/MMCQ/Descriptive).
+        - Allow the tweaking of exam questions and outcome decision by concerned experts. 
+    - A stats generator to map and compare the expeted and actual outcomes.
+4. Ebooks Module : 
+    - Design an interface to browse ebooks classified into categories.
+    - Provide a search box providing "fuzzy searching".
+5. Admin Module
+    - Basically the dictator of the system.
+    - Add/delete ebooks
+    - View users
+    - Authorize test administartors
+6. Test administartors can access test design interface
+7. College Search Module
+    - Allow searching college by filters/seraching
+    - Filters to be based on interests,fields etc
+8. Email Module
+    - Allow communication via emails including potential courses, tests, test scores, reminders
